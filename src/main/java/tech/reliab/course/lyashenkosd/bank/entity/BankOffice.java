@@ -11,6 +11,9 @@ public class BankOffice {
     /** Поле идентификатор банковского офиса */
     private Integer id;
 
+    /** Поле идентификатор банка, которому принадлежит офис */
+    private Integer bankId;
+
     /** Поле название банковского офиса */
     private String name;
 
@@ -42,18 +45,22 @@ public class BankOffice {
     private Integer rent;
 
     /** Конструктор */
-    public BankOffice(Integer id, String name, String address) {
+    public BankOffice(Integer id, Integer bankId, String name, String address, Boolean activityStatus,
+                      Boolean mayToLocateAtmStatus, Integer atmQty, Boolean mayToCreditStatus,
+                      Boolean cashOutStatus, Boolean cashInStatus, Integer moneyQtyInOffice,
+                      Integer rent) {
         setId(id);
+        setBankId(bankId);
         setName(name);
         setAddress(address);
-        setActivityStatus(false);
-        setMayToLocateAtmStatus(false);
-        setAtmQty(0);
-        setMayToCreditStatus(false);
-        setCashingOutStatus(false);
-        setCashingInStatus(false);
-        setMoneyQtyInOffice(0);
-        setRent(0);
+        setActivityStatus(activityStatus);
+        setMayToLocateAtmStatus(mayToLocateAtmStatus);
+        setAtmQty(atmQty);
+        setMayToCreditStatus(mayToCreditStatus);
+        setCashingOutStatus(cashOutStatus);
+        setCashingInStatus(cashInStatus);
+        setMoneyQtyInOffice(moneyQtyInOffice);
+        setRent(rent);
     }
 
     /** Перегрузка функции toString()
@@ -62,6 +69,7 @@ public class BankOffice {
     public String toString(){
         return "\nБанковский офис{" +
                 "\nID Офиса: " + getId() +
+                "\nID Банка-владельца: " + getBankId() +
                 ",\nНазвание: " + getName() +
                 ",\nАдрес: " + getAddress() +
                 ",\nАктивность: " + getActivityStatus() +
@@ -79,6 +87,12 @@ public class BankOffice {
      * @return возвращает id номер банковского офиса */
     public Integer getId(){
         return this.id;
+    }
+
+    /** Функция получения значения поля {@link BankOffice#bankId}
+     * @return возвращает id банка, которому принадлежит банк*/
+    public Integer getBankId(){
+        return this.bankId;
     }
 
     /** Функция получения значения поля {@link BankOffice#name}
@@ -149,6 +163,12 @@ public class BankOffice {
      * @param id идентификатор банковского офиса */
     public void setId(Integer id){
         this.id = id;
+    }
+
+    /** Процедура определения идентификатора банка, которому принадлежит банковский офис
+     * @param bankId идентификатор банка*/
+    public void setBankId(Integer bankId){
+        this.bankId = bankId;
     }
 
     /** Процедура определения названия банковского офиса {@link BankOffice#name}

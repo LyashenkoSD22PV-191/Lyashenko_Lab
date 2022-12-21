@@ -1,76 +1,187 @@
 package tech.reliab.course.lyashenkosd.bank;
 
-import tech.reliab.course.lyashenkosd.bank.entity.*;
+import tech.reliab.course.lyashenkosd.bank.entity.BankAtm;
 import tech.reliab.course.lyashenkosd.bank.service.*;
 import tech.reliab.course.lyashenkosd.bank.service.impl.*;
 
 import java.time.LocalDate;
+import java.util.Scanner;
+
+import static tech.reliab.course.lyashenkosd.bank.utils.Constants.*;
+
 
 public class Main {
     public static void main(String[] args) {
 
-        Bank bank = new Bank(1, "myBank");
         BankService bankService = BankServiceOperations.BANK_SERVICE;
+        for (int i = 1; i <= QUANTITY_BANKS; i++){
+            bankService.createBank(i, "bank N" + i);
+        }
 
-        bankService.addOffice(bank);
-        bankService.addClient(bank);
-        bankService.addEmployee(bank);
-        bankService.addAtm(bank);
-        System.out.println(bank);
-
-        BankOffice bankOffice = new BankOffice(1, "Отделение №1", "улица Пушкина дом Колотушкина");
         BankOfficeService bankOfficeService = BankOfficeServiceOperations.BANK_OFFICE_SERVICE;
-        bankOfficeService.addAtm(bankOffice);
-        System.out.println(bankOffice);
-
-        Employee employee = new Employee(1, "Бруснецева", LocalDate.of(1488, 1, 1), bank, bankOffice, "Уборщик туалетов");
-        EmployeeService employeeService = EmployeeServiceOperations.EMPLOYEE_SERVICE;
-        employeeService.addSalary(employee, 228322);
-        System.out.println(employee);
+        Integer counter = 0;
+        for (int i = 1; i <= QUANTITY_BANKS; i++){
+            for (int j = 1; j <= QUANTITY_OFFICES_IN_ONE_BANK; j++){
+                counter++;
+                bankOfficeService.createOffice(
+                        bankService.getBank(i),
+                        counter,
+                        "office N" + counter,
+                        "address N" + counter,
+                        true,
+                        true,
+                        0, true,
+                        true, true,
+                        0, 0
+                );
+            }
+        }
 
         AtmService atmService = AtmServiceOperations.ATM_SERVICE;
-        BankAtm bankAtm = new BankAtm(1, "Samsung", bank, bankOffice, employee);
-        atmService.addMoney(bankAtm, 228322);
-        System.out.println(bankAtm);
+        counter = 0;
+        for (int i = 1; i <= QUANTITY_OFFICE; i++){
+            for (int j = 1; j <= QUANTITY_ATMS_IN_ONE_OFFICE; j++){
+                counter++;
+                atmService.createATM(
+                        bankService.getBank(bankOfficeService.getBankOffice(i).getBankId()),
+                        bankOfficeService.getBankOffice(i),
+                        counter,
+                        "ATM N" + counter,
+                        counter,
+                        true, true,
+                        0, 0,
+                        BankAtm.Status.WORKING
+                );
+            }
+        }
 
-        User user = new User(1, "Ляшенко Сергей", LocalDate.of(2000,9,11), "Sber", bank);
-
-        PaymentAccount paymentAccount = new PaymentAccount(1, user, bank);
-        PaymentAccountService paymentService = PaymentServiceOperations.PAYMENT_ACCOUNT_SERVICE;
-        paymentService.addMoney(paymentAccount, 228322);
-        System.out.println(paymentAccount);
-
-        CreditAccount creditAccount = new CreditAccount(1, user, bank, employee, paymentAccount);
-        CreditAccountService creditAccountService = CreditAccountServiceOperations.CREDIT_ACCOUNT_SERVICE;
-        creditAccountService.subCreditSum(creditAccount, 0);
-        System.out.println(creditAccount);
+        EmployeeService employeeService = EmployeeServiceOperations.EMPLOYEE_SERVICE;
+        counter = 0;
+        for (int i = 1; i <= QUANTITY_OFFICE; i++){
+            for (int j = 1; j <= QUANTITY_EMPLOYEES_ON_ONE_OFFICE; j++){
+                counter++;
+                employeeService.createEmployee(
+                        counter, "Employee N" + counter,
+                        LocalDate.of(2000, 1, 1),
+                        "post N" + counter,
+                        bankService.getBank(bankOfficeService.getBankOffice(i).getBankId()),
+                        true, bankOfficeService.getBankOffice(i),
+                        true, 0
+                );
+            }
+        }
 
         UserService userService = UserServiceOperations.USER_SERVICE;
-        userService.changeWorkPlace(user, "БГТУ");
-        System.out.println(user);
+        counter = 0;
+        for (int i = 1; i <= QUANTITY_BANKS; i++){
+            for (int j = 1; j <= QUANTITY_USERS_IN_ONE_BANK; j++){
+                counter++;
+                userService.createUser(counter, "User N" + counter,
+                                        LocalDate.of(2000, 1, 1),
+                                        "workPlace N" + counter);
+            }
+        }
+
+        PaymentAccountService paymentAccountService = PaymentServiceOperations.PAYMENT_ACCOUNT_SERVICE;
+        CreditAccountService creditAccountService = CreditAccountServiceOperations.CREDIT_ACCOUNT_SERVICE;
+        counter = 0;
+        Integer userCounter = 0;
+        for (int i = 1; i <= QUANTITY_BANKS; i++){
+            for (int j = 1; j <= QUANTITY_USERS_IN_ONE_BANK; j++){
+                userCounter++;
+
+                for (int z = 1; z <= QUANTITY_PAYS_AND_CREDITS_IN_ONE_USER; z++){
+                    counter++;
+                    paymentAccountService.createPaymentAccount(
+                            bankService.getBank(i),
+                            userService.getUser(userCounter),
+                            counter, 0);
+
+                    creditAccountService.createCreditAccount(
+                            bankService.getBank(i),
+                            userService.getUser(userCounter),
+                            employeeService.getEmployee(i),
+                            paymentAccountService.getPaymentAccount(z),
+                            counter,
+                            LocalDate.of(2000, 1, 1),
+                            LocalDate.of(2000, 1, 1),
+                            12, 228000, 2280
+                    );
+                }
+            }
+        }
+
+        for (int i = 1; i <= QUANTITY_BANKS; i++){
+            System.out.println("----------------------");
+            System.out.println("Bank" + i + "\n");
+            System.out.println(bankService.getBank(i));
+            System.out.println("\n");
+            System.out.println("----------------------");
+        }
+
+        for (int i = 1; i <= QUANTITY_USERS; i++) {
+            System.out.println("----------------------");
+            System.out.println("User" + i + "\n");
+            System.out.println(userService.getUser(i));
+            System.out.println("\n");
+        }
+
+        System.out.println("1 - Банк");
+        System.out.println("2 - Пользователь");
+        System.out.println("Выберите, введя число ");
+        Scanner in = new Scanner(System.in);
+        int answer = in.nextInt();
+        switch (answer) {
+            case 1 -> {
+                System.out.println("Введите номер банка, о котором вывести подробную информацию или 0 для вывода всех");
+                answer = in.nextInt();
+                if (answer == 0) {
+                    for (int i = 1; i <= QUANTITY_BANKS; i++) {
+                        bankService.getAllInformation(i);
+                    }
+                } else {
+                    bankService.getAllInformation(answer);
+                }
+            }
+            case 2 -> {
+                System.out.println("Введите номер клиента, о котором вывести подробную информацию или 0 для вывода всех");
+                answer = in.nextInt();
+                if (answer == 0) {
+                    for (int i = 1; i <= QUANTITY_USERS; i++) {
+                        System.out.println(bankService.getBank(i));
+
+                    }
+                } else {
+                    userService.getAllInformation(answer);
+                }
+            }
+            default -> System.out.println("Вы ввели неверное число");
+        }
 
 
-        System.out.print("\nУдаление:");
 
-        bank = null;
-        System.out.print("\nБанк: " + bank);
-
-        bankOffice = null;
-        System.out.print("\nБанковский офис: " + bankOffice);
-
-        bankAtm = null;
-        System.out.print("\nАТМ: " + bankAtm);
-
-        employee = null;
-        System.out.print("\nСотрудник: " + employee);
-
-        creditAccount = null;
-        System.out.print("\nКредитный аккаунт: " + creditAccount);
-
-        paymentAccount = null;
-        System.out.print("\nПлатежный аккаунт: " + paymentAccount);
-
-        user = null;
-        System.out.print("\nПользователь: " + user);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

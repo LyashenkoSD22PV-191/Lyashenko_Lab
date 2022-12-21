@@ -6,6 +6,21 @@ import tech.reliab.course.lyashenkosd.bank.entity.Bank;
  * @version 0.1*/
 public interface BankService {
 
+    /** Процедура вывода всех данных по банку:
+     * банкоматы, офисы, сотрудники, клиенты в консоль
+     * @param id идентификатор банка*/
+    void getAllInformation(Integer id);
+
+    /** Функция возвращает экземпляр класса {@link Bank}
+     * @param id идентификатор банка */
+    Bank getBank(Integer id);
+
+    /** Процедура создания объекта {@link Bank}
+     * и добавление в список всех существующих банков
+     * @param id идентификатор
+     * @param name название банка*/
+    void createBank(Integer id, String name);
+
     /** Процедура добавления банкомата. <br>
      * Добавляет плюс один к полю <b>atmQty</b>.
      * @param bank банк, к которому следует добавить банкомат*/

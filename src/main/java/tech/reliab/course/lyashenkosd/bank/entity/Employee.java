@@ -42,18 +42,19 @@ public class Employee {
     private Integer salary;
 
     /** Конструктор */
-    public Employee(Integer id, String fullName, LocalDate birthDate, Bank bank, BankOffice bankOffice,
-                    String post){
+    public Employee(Integer id, String fullName, LocalDate birthDate, String post, Bank bank,
+                    Boolean onlineOrNot, BankOffice bankOffice, Boolean mayToGiveCredit,
+                    Integer salary){
 
         setId(id);
         setFullName(fullName);
         setBirthDate(birthDate);
         setPost(post);
         setBank(bank);
-        setOnlineOrNot(false);
+        setOnlineOrNot(onlineOrNot);
         setBankOffice(bankOffice);
-        setMayToGiveCredit(false);
-        setSalary(0);
+        setMayToGiveCredit(mayToGiveCredit);
+        setSalary(salary);
     }
 
     /** Перегрузка функции toString()

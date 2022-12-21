@@ -6,7 +6,7 @@ import java.util.Random;
 /** Класс-модель пользователя со свойствами: <br> <b>{@link User#id}</b>,
  * <br> <b>{@link User#fullName}</b>, <br> <b>{@link User#birthDate}</b>,
  * <br> <b>{@link User#workPlace}</b>, <br> <b>{@link User#monthIncome}</b>,
- * <br> <b>{@link User#bank}</b>, <br> <b>{@link User#creditAccount}</b>,
+ * <br> <b>{@link User#creditAccount}</b>,
  * <br> <b>{@link User#paymentAccount}</b>,<br> <b>{@link User#creditRate}</b>
  * @see tech.reliab.course.lyashenkosd.bank.service.UserService */
 public class User {
@@ -26,10 +26,6 @@ public class User {
     /** Поле месячный доход */
     private Integer monthIncome;
 
-    /** Поле банк, в котором числится клиент
-     * @see Bank*/
-    private Bank bank;
-
     /** Поле кредитный счет клиента
      * @see CreditAccount */
     private CreditAccount creditAccount;
@@ -44,14 +40,13 @@ public class User {
     private Integer creditRate;
 
     /** Конструктор */
-    public User(Integer id, String fullName, LocalDate birthDate, String workPlace ,Bank bank){
+    public User(Integer id, String fullName, LocalDate birthDate, String workPlace){
         setId(id);
         setFullName(fullName);
         setBirthDate(birthDate);
         setWorkPlace(workPlace);
         Random random = new Random();
         setMonthIncome(random.nextInt(10001));
-        setBank(bank);
         setCreditAccount(null);
         setPaymentAccount(null);
         setCreditRate(calculateCreditRate(this.monthIncome));
@@ -80,7 +75,6 @@ public class User {
                 "\nФИО: " + getFullName() +
                 ",\nДата рождения: " + getBirthDate() +
                 ",\nМесто работы: " + getWorkPlace() +
-                ",\nБанк: " + getBank().getName() +
                 ",\nМесячный доход: " + getMonthIncome() +
                 ",\nКредитный рейтинг: " + getCreditRate();
 
@@ -124,12 +118,6 @@ public class User {
      * @return возвращает месячный доход клиента */
     public Integer getMonthIncome() {
         return this.monthIncome;
-    }
-
-    /** Функция получения значения поля {@link User#bank}
-     * @return возвращает банк клиента */
-    public Bank getBank() {
-        return this.bank;
     }
 
     /** Функция получения значения поля {@link User#creditAccount}
@@ -178,12 +166,6 @@ public class User {
      * @param monthIncome месячный доход клиента */
     public void setMonthIncome(Integer monthIncome) {
         this.monthIncome = monthIncome;
-    }
-
-    /** Процедура определения банка клиента {@link User#bank}
-     * @param bank банка клиента */
-    public void setBank(Bank bank) {
-        this.bank = bank;
     }
 
     /** Процедура определения кредитного клиента {@link User#creditAccount}

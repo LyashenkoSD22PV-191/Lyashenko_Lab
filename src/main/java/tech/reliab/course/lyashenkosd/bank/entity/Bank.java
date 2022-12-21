@@ -61,7 +61,7 @@ public class Bank  {
                 ",\nНазвание: " + getName() +
                 ",\nКол-во офисов: " + getOfficeQty() +
                 ",\nКол-во банкоматов: " + getAtmQty() +
-                ",\nКол-во сотрудников: " + getClientQty() +
+                ",\nКол-во сотрудников: " + getEmployeeQty() +
                 ",\nКол-во клиентов: " + getClientQty() +
                 ",\nРейтинг: " + getRate() +
                 ",\nКол-во денег: " + getMoneyQty() +
@@ -166,7 +166,7 @@ public class Bank  {
     }
 
     /** Процедура определения рейтинга банка {@link Bank#moneyQty}
-     * @param moneyQty колличество денег у банка */
+     * @param moneyQty рейтинг банка */
     public void setMoneyQty(Integer moneyQty){
         this.moneyQty = moneyQty;
     }

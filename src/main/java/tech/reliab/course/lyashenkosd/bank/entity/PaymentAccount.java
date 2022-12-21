@@ -21,11 +21,11 @@ public class PaymentAccount {
     private Integer currentSum;
 
     /** Конструктор */
-    public PaymentAccount(Integer id, User user, Bank bank){
-        setId(id);
-        setUser(user);
+    public PaymentAccount(Bank bank, User user, Integer id, Integer currentSum){
         setBank(bank);
-        setCurrentSum(0);
+        setUser(user);
+        setId(id);
+        setCurrentSum(currentSum);
     }
 
     /** Перегрузка функции toString()
