@@ -26,4 +26,10 @@ public interface UserService {
      * @param workPlace место работы клиента
      */
     void changeWorkPlace(User user, String workPlace);
+
+    /** Удаление данных о пользователе
+     * @param user клиент, экземпляр класса User, который требуется удалить
+     * @return null
+     */
+    public User delete(User user);
 }

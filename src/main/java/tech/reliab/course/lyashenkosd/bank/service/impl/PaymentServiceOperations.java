@@ -53,4 +53,10 @@ public class PaymentServiceOperations implements PaymentAccountService {
         }
         paymentAccount.setCurrentSum(paymentAccount.getCurrentSum() - moneyQty);
     }
+
+    @Override
+    public PaymentAccount delete(PaymentAccount paymentAccount){
+        paymentAccount = null;
+        return paymentAccount;
+    }
 }

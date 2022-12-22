@@ -41,4 +41,9 @@ public interface BankService {
      * @param bank банк, к которому следует добавить клиента*/
     void addClient(Bank bank);
 
+    /** Удаление данных о банке. <br>
+     * @param bank банк, экземпляр класса Bank, который требуется удалить
+     * @return null
+     */
+    public Bank delete(Bank bank);
 }

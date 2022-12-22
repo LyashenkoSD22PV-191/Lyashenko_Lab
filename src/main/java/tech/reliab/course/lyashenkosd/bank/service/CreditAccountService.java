@@ -23,4 +23,9 @@ public interface CreditAccountService {
      * @param sum сумма, которую необходимо вычесть. */
     void subCreditSum(CreditAccount creditAccount, Integer sum);
 
+    /** Удаление данных о кредитном счёте. <br>
+     * @param creditAccount кредитный счёт, экземпляр класса CreditAccount, который требуется удалить
+     * @return null
+     */
+    public CreditAccount delete(CreditAccount creditAccount);
 }

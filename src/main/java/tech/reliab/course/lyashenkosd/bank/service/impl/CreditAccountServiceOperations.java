@@ -34,5 +34,9 @@ public class CreditAccountServiceOperations implements CreditAccountService {
     public void subCreditSum(CreditAccount creditAccount, Integer sum){
         creditAccount.setCreditSum(creditAccount.getCreditSum() - sum);
     }
-
+    @Override
+    public CreditAccount delete(CreditAccount creditAccount){
+        creditAccount = null;
+        return creditAccount;
+    }
 }

@@ -44,4 +44,10 @@ public class AtmServiceOperations implements AtmService {
         }
         bankAtm.setMoneyQtyInAtm(bankAtm.getMoneyQtyInAtm() + moneyQty);
     }
+    @Override
+    public BankAtm delete(BankAtm atm){
+        atm = null;
+        return atm;
+    }
+
 }

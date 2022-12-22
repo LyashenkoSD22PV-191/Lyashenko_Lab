@@ -82,4 +82,10 @@ public class BankServiceOperations implements BankService {
         bank.setClientQty(bank.getClientQty() + 1);
     }
 
+    @Override
+    public Bank delete(Bank bank){
+        bank = null;
+        return bank;
+    }
+
 }

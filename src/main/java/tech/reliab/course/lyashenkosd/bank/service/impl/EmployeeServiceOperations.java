@@ -2,6 +2,7 @@ package tech.reliab.course.lyashenkosd.bank.service.impl;
 
 import tech.reliab.course.lyashenkosd.bank.entity.Bank;
 import tech.reliab.course.lyashenkosd.bank.entity.BankOffice;
+import tech.reliab.course.lyashenkosd.bank.entity.CreditAccount;
 import tech.reliab.course.lyashenkosd.bank.entity.Employee;
 import tech.reliab.course.lyashenkosd.bank.service.EmployeeService;
 
@@ -36,4 +37,9 @@ public class EmployeeServiceOperations implements EmployeeService {
       employee.setSalary(employee.getSalary() + sum);
     }
 
+    @Override
+    public Employee delete(Employee employee){
+        employee = null;
+        return employee;
+    }
 }

@@ -19,6 +19,9 @@ public interface AtmService {
      * @param bankAtm банкомат, к которому следует добавить деньги
      * @param moneyQty количество денег, которое следует добавить*/
     void addMoney(BankAtm bankAtm, Integer moneyQty);
-
-
+    /** Удаление данных о банкомате. <br>
+     * @param atm банкомат, экземпляр класса BankAtm, который требуется удалить
+     * @return null
+     */
+    public BankAtm delete(BankAtm atm);
 }

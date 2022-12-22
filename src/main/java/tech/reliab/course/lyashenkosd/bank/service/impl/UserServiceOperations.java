@@ -55,4 +55,9 @@ public class UserServiceOperations implements UserService {
         user.setWorkPlace(workPlace);
     }
 
+    @Override
+    public User delete(User user){
+        user = null;
+        return user;
+    }
 }
