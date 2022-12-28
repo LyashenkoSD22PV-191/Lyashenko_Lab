@@ -4,13 +4,15 @@ import tech.reliab.course.lyashenkosd.bank.entity.Bank;
 import tech.reliab.course.lyashenkosd.bank.entity.BankOffice;
 import tech.reliab.course.lyashenkosd.bank.service.BankOfficeService;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /** Класс-реализация операций банковского офиса, реализует интерфейс сервиса банковского офиса {@link BankOfficeService}
  * <br> Реализуется бизнес-логика. Singleton*/
 public class BankOfficeServiceOperations implements BankOfficeService {
-    private final Map<Integer, BankOffice> offices = new HashMap<>();
+    private final List<BankOffice> offices = new ArrayList<>();
 
     /** Закрытый конструктор, для реализации Singleton */
     private BankOfficeServiceOperations(){}
@@ -22,7 +24,7 @@ public class BankOfficeServiceOperations implements BankOfficeService {
                              Boolean mayToLocateAtmStatus, Integer atmQty, Boolean mayToCreditStatus,
                              Boolean cashOutStatus, Boolean cashInStatus, Integer moneyQtyInOffice, Integer rent) {
         bank.setOfficeQty(bank.getOfficeQty() + 1);
-        offices.put(id, new BankOffice(id, bank.getId(), name, address, activityStatus, mayToLocateAtmStatus,
+        offices.add(new BankOffice(id, bank.getId(), name, address, activityStatus, mayToLocateAtmStatus,
                 atmQty, mayToCreditStatus, cashOutStatus, cashInStatus, moneyQtyInOffice, rent));
 
     }

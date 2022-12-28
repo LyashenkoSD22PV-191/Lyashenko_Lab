@@ -20,7 +20,7 @@ public class Main {
 
         BankOfficeService bankOfficeService = BankOfficeServiceOperations.BANK_OFFICE_SERVICE;
         Integer counter = 0;
-        for (int i = 1; i <= QUANTITY_BANKS; i++){
+        for (int i = 0; i <= QUANTITY_BANKS-1; i++){
             for (int j = 1; j <= QUANTITY_OFFICES_IN_ONE_BANK; j++){
                 counter++;
                 bankOfficeService.createOffice(
@@ -39,11 +39,11 @@ public class Main {
 
         AtmService atmService = AtmServiceOperations.ATM_SERVICE;
         counter = 0;
-        for (int i = 1; i <= QUANTITY_OFFICE; i++){
+        for (int i = 0; i <= QUANTITY_OFFICE-1; i++){
             for (int j = 1; j <= QUANTITY_ATMS_IN_ONE_OFFICE; j++){
                 counter++;
                 atmService.createATM(
-                        bankService.getBank(bankOfficeService.getBankOffice(i).getBankId()),
+                        bankService.getBank((bankOfficeService.getBankOffice(i).getBankId())-1),
                         bankOfficeService.getBankOffice(i),
                         counter,
                         "ATM N" + counter,
@@ -57,14 +57,14 @@ public class Main {
 
         EmployeeService employeeService = EmployeeServiceOperations.EMPLOYEE_SERVICE;
         counter = 0;
-        for (int i = 1; i <= QUANTITY_OFFICE; i++){
+        for (int i = 0; i <= QUANTITY_OFFICE-1; i++){
             for (int j = 1; j <= QUANTITY_EMPLOYEES_ON_ONE_OFFICE; j++){
                 counter++;
                 employeeService.createEmployee(
                         counter, "Employee N" + counter,
                         LocalDate.of(2000, 1, 1),
                         "post N" + counter,
-                        bankService.getBank(bankOfficeService.getBankOffice(i).getBankId()),
+                        bankService.getBank((bankOfficeService.getBankOffice(i).getBankId())-1),
                         true, bankOfficeService.getBankOffice(i),
                         true, 0
                 );
@@ -73,7 +73,7 @@ public class Main {
 
         UserService userService = UserServiceOperations.USER_SERVICE;
         counter = 0;
-        for (int i = 1; i <= QUANTITY_BANKS; i++){
+        for (int i = 0; i <= QUANTITY_BANKS-1; i++){
             for (int j = 1; j <= QUANTITY_USERS_IN_ONE_BANK; j++){
                 counter++;
                 userService.createUser(counter, "User N" + counter,
@@ -86,22 +86,22 @@ public class Main {
         CreditAccountService creditAccountService = CreditAccountServiceOperations.CREDIT_ACCOUNT_SERVICE;
         counter = 0;
         Integer userCounter = 0;
-        for (int i = 1; i <= QUANTITY_BANKS; i++){
-            for (int j = 1; j <= QUANTITY_USERS_IN_ONE_BANK; j++){
+        for (int i = 0; i <= QUANTITY_BANKS-1; i++){
+            for (int j = 0; j <= QUANTITY_USERS_IN_ONE_BANK-1; j++){
                 userCounter++;
 
                 for (int z = 1; z <= QUANTITY_PAYS_AND_CREDITS_IN_ONE_USER; z++){
                     counter++;
                     paymentAccountService.createPaymentAccount(
                             bankService.getBank(i),
-                            userService.getUser(userCounter),
+                            userService.getUser(userCounter-1),
                             counter, 0);
 
                     creditAccountService.createCreditAccount(
                             bankService.getBank(i),
-                            userService.getUser(userCounter),
+                            userService.getUser(userCounter-1),
                             employeeService.getEmployee(i),
-                            paymentAccountService.getPaymentAccount(z),
+                            paymentAccountService.getPaymentAccount(z-1),
                             counter,
                             LocalDate.of(2000, 1, 1),
                             LocalDate.of(2000, 1, 1),
@@ -111,7 +111,7 @@ public class Main {
             }
         }
 
-        for (int i = 1; i <= QUANTITY_BANKS; i++){
+        for (int i = 0; i <= QUANTITY_BANKS-1; i++){
             System.out.println("----------------------");
             System.out.println("Bank" + i + "\n");
             System.out.println(bankService.getBank(i));
@@ -119,7 +119,7 @@ public class Main {
             System.out.println("----------------------");
         }
 
-        for (int i = 1; i <= QUANTITY_USERS; i++) {
+        for (int i = 1; i <= QUANTITY_USERS-1; i++) {
             System.out.println("----------------------");
             System.out.println("User" + i + "\n");
             System.out.println(userService.getUser(i));
@@ -136,7 +136,7 @@ public class Main {
                 System.out.println("Введите номер банка, о котором вывести подробную информацию или 0 для вывода всех");
                 answer = in.nextInt();
                 if (answer == 0) {
-                    for (int i = 1; i <= QUANTITY_BANKS; i++) {
+                    for (int i = 1; i <= QUANTITY_BANKS-1; i++) {
                         bankService.getAllInformation(i);
                     }
                 } else {
@@ -147,8 +147,8 @@ public class Main {
                 System.out.println("Введите номер клиента, о котором вывести подробную информацию или 0 для вывода всех");
                 answer = in.nextInt();
                 if (answer == 0) {
-                    for (int i = 1; i <= QUANTITY_USERS; i++) {
-                        System.out.println(bankService.getBank(i));
+                    for (int i = 1; i < QUANTITY_USERS-1; i++) {
+                        userService.getAllInformation(i);
 
                     }
                 } else {

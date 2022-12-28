@@ -5,13 +5,14 @@ import tech.reliab.course.lyashenkosd.bank.entity.BankAtm;
 import tech.reliab.course.lyashenkosd.bank.entity.BankOffice;
 import tech.reliab.course.lyashenkosd.bank.service.AtmService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /** Класс-реализация операция с банкоматом, реализует интерфейс сервиса банкомата {@link AtmService}. <br>
  * Реализуется бизнес-логика. Singleton */
 public class AtmServiceOperations implements AtmService {
-    private final Map<Integer, BankAtm> atms = new HashMap<>();
+    private final List<BankAtm> atms = new ArrayList<BankAtm>();
 
     private AtmServiceOperations(){}
 
@@ -23,7 +24,7 @@ public class AtmServiceOperations implements AtmService {
                           Integer moneyQtyInAtm, Integer serviceCost, BankAtm.Status status) {
         bank.setAtmQty(bank.getAtmQty() + 1);
         bankOffice.setAtmQty(bankOffice.getAtmQty() + 1);
-        atms.put(id, new BankAtm(bank, bankOffice, id, name, employeeId, cashOutStatus, cashInStatus,
+        atms.add(new BankAtm(bank, bankOffice, id, name, employeeId, cashOutStatus, cashInStatus,
                                 moneyQtyInAtm, serviceCost, status));
     }
 

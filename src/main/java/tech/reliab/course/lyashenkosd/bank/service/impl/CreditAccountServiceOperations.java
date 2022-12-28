@@ -4,13 +4,15 @@ import tech.reliab.course.lyashenkosd.bank.entity.*;
 import tech.reliab.course.lyashenkosd.bank.service.CreditAccountService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
 /** Класс-реализация операций кредитного счета, реализует интерфейс сервис кредитного счета {@link CreditAccountService}.
  * <br> Реализуется бизнес-логика. Singleton */
 public class CreditAccountServiceOperations implements CreditAccountService {
-    private final Map<Integer, CreditAccount> creditAccounts = new HashMap<>();
+    private final List<CreditAccount> creditAccounts = new ArrayList<>();
 
     private CreditAccountServiceOperations(){}
 
@@ -23,7 +25,7 @@ public class CreditAccountServiceOperations implements CreditAccountService {
         CreditAccount creditAccount = new CreditAccount(bank, user, employee, paymentAccount,
                 id, startCreditDate, finishCreditDate, creditMonthQty, creditSum, creditMonthPayment);
         user.setCreditAccount(creditAccount);
-        creditAccounts.put(id, creditAccount);
+        creditAccounts.add(creditAccount);
     }
 
     @Override

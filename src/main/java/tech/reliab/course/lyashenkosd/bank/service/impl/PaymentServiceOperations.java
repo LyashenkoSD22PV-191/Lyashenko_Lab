@@ -5,6 +5,8 @@ import tech.reliab.course.lyashenkosd.bank.entity.PaymentAccount;
 import tech.reliab.course.lyashenkosd.bank.entity.User;
 import tech.reliab.course.lyashenkosd.bank.service.PaymentAccountService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -12,7 +14,7 @@ import java.util.Objects;
 /** Класс-реализация операций платежного счета, реализует интерфейс платежного счета {@link PaymentAccountService} <br>
  * Реализуется бизнес-логика. <br> Singleton*/
 public class PaymentServiceOperations implements PaymentAccountService {
-    private final Map<Integer, PaymentAccount> paymentAccounts = new HashMap<>();
+    private final List<PaymentAccount> paymentAccounts = new ArrayList<>();
 
     private PaymentServiceOperations(){}
 
@@ -22,7 +24,7 @@ public class PaymentServiceOperations implements PaymentAccountService {
     public void createPaymentAccount(Bank bank, User user, Integer id, Integer currentSum) {
         boolean isUserAlreadyExist = false;
         for (int i = 1; i <= paymentAccounts.size(); i++){
-            if (Objects.equals(paymentAccounts.get(i).getUser().getId(), user.getId())){
+            if (Objects.equals(paymentAccounts.get(i-1).getUser().getId(), user.getId())){
                 isUserAlreadyExist = true;
             }
         }
@@ -33,7 +35,7 @@ public class PaymentServiceOperations implements PaymentAccountService {
 
         PaymentAccount paymentAccount = new PaymentAccount(bank, user, id, 0);
         user.setPaymentAccount(paymentAccount);
-        paymentAccounts.put(id, paymentAccount);
+        paymentAccounts.add(paymentAccount);
 
     }
 

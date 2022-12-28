@@ -7,13 +7,15 @@ import tech.reliab.course.lyashenkosd.bank.entity.Employee;
 import tech.reliab.course.lyashenkosd.bank.service.EmployeeService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
 /** Класс-реализация операций сотрудника, реализует интерфейс сотрудника {@link EmployeeService} <br>
  * Реализуется бизнес-логика. Singleton*/
 public class EmployeeServiceOperations implements EmployeeService {
-    private final Map<Integer, Employee> employees = new HashMap<>();
+    private final List<Employee> employees = new ArrayList<>();
 
     private EmployeeServiceOperations(){}
 
@@ -24,7 +26,7 @@ public class EmployeeServiceOperations implements EmployeeService {
                                Bank bank, Boolean onlineOrNot, BankOffice bankOffice,
                                Boolean mayToGiveCredit, Integer salary) {
         bank.setEmployeeQty(bank.getEmployeeQty() + 1);
-        employees.put(id, new Employee(id, fullName, birthDate, post,
+        employees.add(new Employee(id, fullName, birthDate, post,
                         bank, onlineOrNot, bankOffice, mayToGiveCredit, salary));
     }
 

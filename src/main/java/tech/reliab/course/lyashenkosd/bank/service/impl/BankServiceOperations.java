@@ -5,6 +5,8 @@ import tech.reliab.course.lyashenkosd.bank.service.*;
 
 import static tech.reliab.course.lyashenkosd.bank.utils.Constants.*;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ import java.util.Map;
  * Реализуется бизнес-логика. <br> Singleton*/
 public class BankServiceOperations implements BankService {
 
-    private final Map<Integer, Bank> banks = new HashMap<>();
+    private final List<Bank> banks = new ArrayList<>();
 
     private BankServiceOperations(){}
 
@@ -25,27 +27,27 @@ public class BankServiceOperations implements BankService {
         EmployeeService employeeService = EmployeeServiceOperations.EMPLOYEE_SERVICE;
         UserService userService = UserServiceOperations.USER_SERVICE;
 
-        System.out.println("Информация о банке: " + getBank(id).getName());
+        System.out.println("Информация о банке: " + getBank(id-1).getName());
 
-        for (int i = 1; i <= QUANTITY_OFFICE; i++){
+        for (int i = 0; i <= QUANTITY_OFFICE-1; i++){
             if (id == bankOfficeService.getBankOffice(i).getBankId()){
                 System.out.println(bankOfficeService.getBankOffice(i));
             }
         }
 
-        for (int i = 1; i <= QUANTITY_ATMS; i++){
+        for (int i = 0; i <= QUANTITY_ATMS-1; i++){
             if (id == atmService.getAtm(i).getBank().getId()){
                 System.out.println(atmService.getAtm(i));
             }
         }
 
-        for (int i = 1; i <= QUANTITY_EMPLOYEES; i++){
+        for (int i = 0; i <= QUANTITY_EMPLOYEES-1; i++){
             if(id == employeeService.getEmployee(i).getBank().getId()){
                 System.out.println(employeeService.getEmployee(i));
             }
         }
 
-        for (int i = 1; i <= QUANTITY_USERS; i++){
+        for (int i = 0; i <= QUANTITY_USERS-1; i++){
             if (id == userService.getUser(i).getCreditAccount().getBank().getId()){
                 System.out.println(userService.getUser(i));
             }
@@ -59,7 +61,7 @@ public class BankServiceOperations implements BankService {
 
     @Override
     public void createBank(Integer id, String name){
-        banks.put(id, new Bank(id, name));
+        banks.add(new Bank(id, name));
     }
 
     @Override
