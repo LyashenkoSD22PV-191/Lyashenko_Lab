@@ -6,45 +6,72 @@ package tech.reliab.course.lyashenkosd.bank.entity;
  * <br> <b>{@link BankOffice#mayToCreditStatus}</b>, <br> <b>{@link BankOffice#cashOutStatus}</b>,
  * <br> <b>{@link BankOffice#cashInStatus}</b>, <br> <b>{@link BankOffice#moneyQtyInOffice}</b>,
  * <br> <b>{@link BankOffice#rent}</b>
- * @see tech.reliab.course.lyashenkosd.bank.service.BankOfficeService*/
+ * @see tech.reliab.course.lyashenkosd.bank.service.BankOfficeService
+ * */
 public class BankOffice {
-    /** Поле идентификатор банковского офиса */
+    /**
+     * Поле идентификатор банковского офиса
+     */
     private Integer id;
 
-    /** Поле идентификатор банка, которому принадлежит офис */
+    /**
+     * Поле идентификатор банка, которому принадлежит офис
+     */
     private Integer bankId;
 
-    /** Поле название банковского офиса */
+    /**
+     * Поле название банковского офиса
+     */
     private String name;
 
-    /** Поле адрес банковского офиса */
+    /**
+     * Поле адрес банковского офиса
+     */
     private String address;
 
-    /** Поле статус работы офиса */
+    /**
+     * Поле статус работы офиса
+     */
     private Boolean activityStatus;
 
-    /** Поле есть ли возможность разместить банкомат */
+    /**
+     * Поле есть ли возможность разместить банкомат
+     */
     private Boolean mayToLocateAtmStatus;
 
-    /** Поле количество банкоматов в офисе */
+    /**
+     * Поле количество банкоматов в офисе
+     */
     private Integer atmQty;
 
-    /** Поле возможность выдавать кредиты в офисе */
+    /**
+     * Поле возможность выдавать кредиты в офисе
+     */
     private Boolean mayToCreditStatus;
 
-    /** Возможность снять деньги в офисе */
+    /**
+     * Возможность снять деньги в офисе
+     */
     private Boolean cashOutStatus;
 
-    /** Возможность положить деньги в офисе */
+    /**
+     * Возможность положить деньги в офисе
+     */
     private Boolean cashInStatus;
 
-    /** Поле количество денег в офисе */
+    /**
+     * Поле количество денег в офисе
+     */
     private Integer moneyQtyInOffice;
 
-    /** Поле стоимость аренды банковского офиса */
+    /**
+     * Поле стоимость аренды банковского офиса
+     */
     private Integer rent;
 
-    /** Конструктор */
+    /**
+     * Конструктор
+     */
     public BankOffice(Integer id, Integer bankId, String name, String address, Boolean activityStatus,
                       Boolean mayToLocateAtmStatus, Integer atmQty, Boolean mayToCreditStatus,
                       Boolean cashOutStatus, Boolean cashInStatus, Integer moneyQtyInOffice,
@@ -63,10 +90,12 @@ public class BankOffice {
         setRent(rent);
     }
 
-    /** Перегрузка функции toString()
-     * для возвращения информации о банковском офисе в виде строки */
+    /**
+     * Перегрузка функции toString()
+     * для возвращения информации о банковском офисе в виде строки
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return "\nБанковский офис{" +
                 "\nID Офиса: " + getId() +
                 "\nID Банка-владельца: " + getBankId() +
@@ -83,159 +112,232 @@ public class BankOffice {
                 "\n}";
     }
 
-    /** Функция получения значения поля {@link BankOffice#id}
-     * @return возвращает id номер банковского офиса */
-    public Integer getId(){
+    /**
+     * Функция получения значения поля {@link BankOffice#id}
+     *
+     * @return возвращает id номер банковского офиса
+     */
+    public Integer getId() {
         return this.id;
     }
 
-    /** Функция получения значения поля {@link BankOffice#bankId}
-     * @return возвращает id банка, которому принадлежит банк*/
-    public Integer getBankId(){
+    /**
+     * Функция получения значения поля {@link BankOffice#bankId}
+     *
+     * @return возвращает id банка, которому принадлежит банк
+     */
+    public Integer getBankId() {
         return this.bankId;
     }
 
-    /** Функция получения значения поля {@link BankOffice#name}
-     * @return возвращает название банковского офиса */
-    public String getName(){
+    /**
+     * Функция получения значения поля {@link BankOffice#name}
+     *
+     * @return возвращает название банковского офиса
+     */
+    public String getName() {
         return this.name;
     }
 
-    /** Функция получения значения поля {@link BankOffice#address}
-     * @return возвращает адрес банковского офиса */
-    public String getAddress(){
+    /**
+     * Функция получения значения поля {@link BankOffice#address}
+     *
+     * @return возвращает адрес банковского офиса
+     */
+    public String getAddress() {
         return this.address;
     }
 
-    /** Функция получения значения поля {@link BankOffice#activityStatus}
-     * @return возвращает статус работы банковского офиса */
-    public Boolean getActivityStatus(){
+    /**
+     * Функция получения значения поля {@link BankOffice#activityStatus}
+     *
+     * @return возвращает статус работы банковского офиса
+     */
+    public Boolean getActivityStatus() {
         return this.activityStatus;
     }
 
-    /** Функция получения значения поля {@link BankOffice#mayToLocateAtmStatus}
+    /**
+     * Функция получения значения поля {@link BankOffice#mayToLocateAtmStatus}
+     *
      * @return <b>true</b>, если есть возможность разместить банкомат <br>
-     *  <b>false</b>, если нет возможности разместить банкомат */
-    public Boolean getMayToLocateAtmStatus(){
+     * <b>false</b>, если нет возможности разместить банкомат
+     */
+    public Boolean getMayToLocateAtmStatus() {
         return this.mayToLocateAtmStatus;
     }
 
-    /** Функция получения значения поля {@link BankOffice#atmQty}
-     * @return возвращает количество банкоматов в банковском офисе */
-    public Integer getAtmQty(){
+    /**
+     * Функция получения значения поля {@link BankOffice#atmQty}
+     *
+     * @return возвращает количество банкоматов в банковском офисе
+     */
+    public Integer getAtmQty() {
         return this.atmQty;
     }
 
-    /** Функция получения значения поля {@link BankOffice#mayToCreditStatus}
+    /**
+     * Функция получения значения поля {@link BankOffice#mayToCreditStatus}
+     *
      * @return <b>true</b>, если есть возможность выдавать кредиты <br>
-     *  <b>false</b>, если нет возможности выдавать кредиты */
-    public Boolean getMayToCreditStatus(){
+     * <b>false</b>, если нет возможности выдавать кредиты
+     */
+    public Boolean getMayToCreditStatus() {
         return this.mayToCreditStatus;
     }
 
-    /** Функция получения значения поля {@link BankOffice#cashOutStatus}
+    /**
+     * Функция получения значения поля {@link BankOffice#cashOutStatus}
+     *
      * @return <b>true</b>>, если есть возможность снимать деньги <br>
-     *  <b>false</b>, если нет возможности снимать деньги */
-    public Boolean getCashingOutStatus(){
+     * <b>false</b>, если нет возможности снимать деньги
+     */
+    public Boolean getCashingOutStatus() {
         return this.cashOutStatus;
     }
 
-    /** Функция получения значения поля {@link BankOffice#cashInStatus}
+    /**
+     * Функция получения значения поля {@link BankOffice#cashInStatus}
+     *
      * @return <b>true</b>, если есть возможность положить деньги <br>
-     *  <b>false</b>, если нет возможности положить деньги */
-    public Boolean getCashingInStatus(){
+     * <b>false</b>, если нет возможности положить деньги
+     */
+    public Boolean getCashingInStatus() {
         return this.cashInStatus;
     }
 
-    /** Функция получения значения поля {@link BankOffice#atmQty}
-     * @return возвращает количество денег в банковском офисе */
-    public Integer getMoneyQtyInOffice(){
+    /**
+     * Функция получения значения поля {@link BankOffice#atmQty}
+     *
+     * @return возвращает количество денег в банковском офисе
+     */
+    public Integer getMoneyQtyInOffice() {
         return this.moneyQtyInOffice;
     }
 
-    /** Функция получения значения поля {@link BankOffice#rent}
-     * @return возвращает стоимость аренды банковского офиса */
-    public Integer getRent(){
+    /**
+     * Функция получения значения поля {@link BankOffice#rent}
+     *
+     * @return возвращает стоимость аренды банковского офиса
+     */
+    public Integer getRent() {
         return this.rent;
     }
 
-    /** Процедура определения идентификатора банковского офиса {@link BankOffice#id}
-     * @param id идентификатор банковского офиса */
-    public void setId(Integer id){
+    /**
+     * Процедура определения идентификатора банковского офиса {@link BankOffice#id}
+     *
+     * @param id идентификатор банковского офиса
+     */
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    /** Процедура определения идентификатора банка, которому принадлежит банковский офис
-     * @param bankId идентификатор банка*/
-    public void setBankId(Integer bankId){
+    /**
+     * Процедура определения идентификатора банка, которому принадлежит банковский офис
+     *
+     * @param bankId идентификатор банка
+     */
+    public void setBankId(Integer bankId) {
         this.bankId = bankId;
     }
 
-    /** Процедура определения названия банковского офиса {@link BankOffice#name}
-     * @param name название банковского офиса */
-    public void setName(String name){
+    /**
+     * Процедура определения названия банковского офиса {@link BankOffice#name}
+     *
+     * @param name название банковского офиса
+     */
+    public void setName(String name) {
         this.name = name;
     }
 
-    /** Процедура определения адреса банковского офиса {@link BankOffice#address}
-     * @param address адрес банковского офиса */
-    public void setAddress(String address){
+    /**
+     * Процедура определения адреса банковского офиса {@link BankOffice#address}
+     *
+     * @param address адрес банковского офиса
+     */
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    /** Процедура определения статуса работы банковского офиса {@link BankOffice#activityStatus}
-     * @param activityStatus статус работы банковского офиса */
+    /**
+     * Процедура определения статуса работы банковского офиса {@link BankOffice#activityStatus}
+     *
+     * @param activityStatus статус работы банковского офиса
+     */
     public void setActivityStatus(Boolean activityStatus) {
         this.activityStatus = activityStatus;
     }
 
-    /** Процедура определения возможности разместить банкомат в банковском офисе {@link BankOffice#mayToLocateAtmStatus}
+    /**
+     * Процедура определения возможности разместить банкомат в банковском офисе {@link BankOffice#mayToLocateAtmStatus}
+     *
      * @param mayToLocateAtmStatus возможность разместить банкомат в офисе <br>
-     * <b>true</b> - да <br>
-     * <b>false</b> - нет*/
+     *                             <b>true</b> - да <br>
+     *                             <b>false</b> - нет
+     */
     public void setMayToLocateAtmStatus(Boolean mayToLocateAtmStatus) {
         this.mayToLocateAtmStatus = mayToLocateAtmStatus;
     }
 
-    /** Процедура определения количества банкоматов в банковском офисе {@link BankOffice#atmQty}
-     * @param atmQty количество банкоматов в банковском офисе */
-    public void setAtmQty(Integer atmQty){
+    /**
+     * Процедура определения количества банкоматов в банковском офисе {@link BankOffice#atmQty}
+     *
+     * @param atmQty количество банкоматов в банковском офисе
+     */
+    public void setAtmQty(Integer atmQty) {
         this.atmQty = atmQty;
     }
 
-    /** Процедура определения возможности выдавать кредиты в банковском офисе {@link BankOffice#mayToCreditStatus}
+    /**
+     * Процедура определения возможности выдавать кредиты в банковском офисе {@link BankOffice#mayToCreditStatus}
+     *
      * @param mayToCreditStatus возможность выдавать кредиты в офисе в офисе <br>
-     * <b>true</b> - да <br>
-     * <b>false</b> - нет*/
+     *                          <b>true</b> - да <br>
+     *                          <b>false</b> - нет
+     */
     public void setMayToCreditStatus(Boolean mayToCreditStatus) {
         this.mayToCreditStatus = mayToCreditStatus;
     }
 
-    /** Процедура определения возможности снимать деньги в банковском офисе {@link BankOffice#cashOutStatus}
+    /**
+     * Процедура определения возможности снимать деньги в банковском офисе {@link BankOffice#cashOutStatus}
+     *
      * @param cashOutStatus возможность снимать деньги в офисе в офисе <br>
-     * <b>true</b> - да <br>
-     * <b>false</b> - нет*/
+     *                      <b>true</b> - да <br>
+     *                      <b>false</b> - нет
+     */
     public void setCashingOutStatus(Boolean cashOutStatus) {
         this.cashOutStatus = cashOutStatus;
     }
 
-    /** Процедура определения возможности вносить деньги в банковском офисе {@link BankOffice#cashInStatus}
+    /**
+     * Процедура определения возможности вносить деньги в банковском офисе {@link BankOffice#cashInStatus}
+     *
      * @param cashInStatus возможность вносить деньги в офисе в офисе <br>
-     * <b>true</b> - да <br>
-     * <b>false</b> - нет*/
+     *                     <b>true</b> - да <br>
+     *                     <b>false</b> - нет
+     */
     public void setCashingInStatus(Boolean cashInStatus) {
         this.cashInStatus = cashInStatus;
     }
 
-    /** Процедура определения количества денег в банковском офисе {@link BankOffice#moneyQtyInOffice}
-     * @param moneyQtyInOffice количество денег в банковском офисе */
+    /**
+     * Процедура определения количества денег в банковском офисе {@link BankOffice#moneyQtyInOffice}
+     *
+     * @param moneyQtyInOffice количество денег в банковском офисе
+     */
     public void setMoneyQtyInOffice(Integer moneyQtyInOffice) {
         this.moneyQtyInOffice = moneyQtyInOffice;
     }
 
-    /** Процедура определения стоимости аренды банковского офиса {@link BankOffice#rent}
-     * @param rent стоимость аренды банковского офиса */
+    /**
+     * Процедура определения стоимости аренды банковского офиса {@link BankOffice#rent}
+     *
+     * @param rent стоимость аренды банковского офиса
+     */
     public void setRent(Integer rent) {
         this.rent = rent;
     }
 }
+

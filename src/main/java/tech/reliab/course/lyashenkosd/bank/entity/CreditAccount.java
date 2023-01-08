@@ -8,51 +8,80 @@ import java.time.LocalDate;
  * <br> <b>{@link CreditAccount#creditMonthQty}</b>, <br> <b>{@link CreditAccount#creditSum}</b>,
  * <br> <b>{@link CreditAccount#creditMonthPayment}</b>, <br> <b>{@link CreditAccount#percent}</b>,
  * <br> <b>{@link CreditAccount#employee}</b>, <br> <b>{@link CreditAccount#paymentAccount}</b>
- * @see tech.reliab.course.lyashenkosd.bank.service.CreditAccountService */
+ * @see tech.reliab.course.lyashenkosd.bank.service.CreditAccountService
+ * */
 public class CreditAccount {
 
-    /** Поле идентификатор кредитного счета. */
+    /**
+     * Поле идентификатор кредитного счета.
+     */
     private Integer id;
 
-    /** Поле пользователь, за которым закреплен кредитный счет. <br>
-     * @see User */
+    /**
+     * Поле пользователь, за которым закреплен кредитный счет. <br>
+     *
+     * @see User
+     */
     private User user;
 
-    /** Поле банка, где взять кредит. <br>
-     * @see Bank */
+    /**
+     * Поле банка, где взять кредит. <br>
+     *
+     * @see Bank
+     */
     private Bank bank;
 
-    /** Поле дата начала кредита */
+    /**
+     * Поле дата начала кредита
+     */
     private LocalDate startCreditDate;
 
-    /** Поле дата окончания кредита */
+    /**
+     * Поле дата окончания кредита
+     */
     private LocalDate finishCreditDate;
 
-    /** Поле кол-во месяцев, на которые взят кредит */
+    /**
+     * Поле кол-во месяцев, на которые взят кредит
+     */
     private Integer creditMonthQty;
 
-    /** Поле сумма кредита */
+    /**
+     * Поле сумма кредита
+     */
     private Integer creditSum;
 
-    /** Поле ежемесячный платеж */
+    /**
+     * Поле ежемесячный платеж
+     */
     private Integer creditMonthPayment;
 
-    /** Поле процентная ставка. <br>
-     * Должна равняться кредитной ставке банка, в котором взять кредит. */
+    /**
+     * Поле процентная ставка. <br>
+     * Должна равняться кредитной ставке банка, в котором взять кредит.
+     */
     private Float percent;
 
-    /** Поле сотрудник, который выдал кредит
-     * @see Employee */
+    /**
+     * Поле сотрудник, который выдал кредит
+     *
+     * @see Employee
+     */
     private Employee employee;
 
-    /** Поле платежный счет в банке, с которого будет осуществляться погашение кредита. <br>
-     * @see PaymentAccount */
+    /**
+     * Поле платежный счет в банке, с которого будет осуществляться погашение кредита. <br>
+     *
+     * @see PaymentAccount
+     */
     private PaymentAccount paymentAccount;
 
-    /** Конструктор */
+    /**
+     * Конструктор
+     */
     public CreditAccount(Bank bank, User user, Employee employee, PaymentAccount paymentAccount,
                          Integer id, LocalDate startCreditDate, LocalDate finishCreditDate,
-                         Integer creditMonthQty, Integer creditSum, Integer creditMonthPayment){
+                         Integer creditMonthQty, Integer creditSum, Integer creditMonthPayment) {
         setBank(bank);
         setUser(user);
         setEmployee(employee);
@@ -67,10 +96,12 @@ public class CreditAccount {
 
     }
 
-    /** Перегрузка функции toString()
-     * для возвращения информации о кредитном счете в виде строки */
+    /**
+     * Перегрузка функции toString()
+     * для возвращения информации о кредитном счете в виде строки
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return "\nКредитный счёт{ " +
                 "\nID кредитного счета: " + getId() +
                 ",\nПользователь: " + getUser().getFullName() +
@@ -87,142 +118,208 @@ public class CreditAccount {
                 "\n}";
     }
 
-    /** Функция получения значения поля {@link CreditAccount#id}
-     * @return возвращает id номер кредитного счета */
-    public Integer getId(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#id}
+     *
+     * @return возвращает id номер кредитного счета
+     */
+    public Integer getId() {
         return this.id;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#user} <br>
+    /**
+     * Функция получения значения поля {@link CreditAccount#user} <br>
      * См. также {@link User}
-     * @return возвращает пользователя кредитного счета */
-    public User getUser(){
+     *
+     * @return возвращает пользователя кредитного счета
+     */
+    public User getUser() {
         return this.user;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#bank} <br>
+    /**
+     * Функция получения значения поля {@link CreditAccount#bank} <br>
      * См. также {@link Bank}
-     * @return возвращает банк кредитного счета, где взят кредит */
-    public Bank getBank(){
+     *
+     * @return возвращает банк кредитного счета, где взят кредит
+     */
+    public Bank getBank() {
         return this.bank;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#startCreditDate}
-     * @return возвращает дату начала кредита */
-    public LocalDate getStartCreditDate(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#startCreditDate}
+     *
+     * @return возвращает дату начала кредита
+     */
+    public LocalDate getStartCreditDate() {
         return this.startCreditDate;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#finishCreditDate}
-     * @return возвращает дату окончания кредита */
-    public LocalDate getFinishCreditDate(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#finishCreditDate}
+     *
+     * @return возвращает дату окончания кредита
+     */
+    public LocalDate getFinishCreditDate() {
         return this.finishCreditDate;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#creditMonthQty}
-     * @return возвращает количество месяцев кредита */
-    public Integer getCreditMonthQty(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#creditMonthQty}
+     *
+     * @return возвращает количество месяцев кредита
+     */
+    public Integer getCreditMonthQty() {
         return this.creditMonthQty;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#creditSum}
-     * @return возвращает сумму кредита */
-    public Integer getCreditSum(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#creditSum}
+     *
+     * @return возвращает сумму кредита
+     */
+    public Integer getCreditSum() {
         return this.creditSum;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#creditMonthPayment}
-     * @return возвращает ежемесячный платеж */
-    public Integer getCreditMonthPayment(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#creditMonthPayment}
+     *
+     * @return возвращает ежемесячный платеж
+     */
+    public Integer getCreditMonthPayment() {
         return this.creditMonthPayment;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#percent}
-     * @return возвращает процентную ставку кредита */
-    public Float getPercent(){
+    /**
+     * Функция получения значения поля {@link CreditAccount#percent}
+     *
+     * @return возвращает процентную ставку кредита
+     */
+    public Float getPercent() {
         return this.percent;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#employee}. <br>
+    /**
+     * Функция получения значения поля {@link CreditAccount#employee}. <br>
      * См. также {@link Employee}
-     * @return возвращает сотрудника, который выдал кредит */
-    public Employee getEmployee(){
+     *
+     * @return возвращает сотрудника, который выдал кредит
+     */
+    public Employee getEmployee() {
         return this.employee;
     }
 
-    /** Функция получения значения поля {@link CreditAccount#paymentAccount} <br>
+    /**
+     * Функция получения значения поля {@link CreditAccount#paymentAccount} <br>
      * См. также {@link PaymentAccount}
-     * @return возвращает платежный счет, с которого осуществляется погашение данного кредита */
-    public PaymentAccount getPaymentAccount(){
+     *
+     * @return возвращает платежный счет, с которого осуществляется погашение данного кредита
+     */
+    public PaymentAccount getPaymentAccount() {
         return this.paymentAccount;
     }
 
-    /** Процедура определения идентификатора кредитного счета {@link CreditAccount#id}
-     * @param id идентификатор кредитного счета */
+    /**
+     * Процедура определения идентификатора кредитного счета {@link CreditAccount#id}
+     *
+     * @param id идентификатор кредитного счета
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /** Процедура определения пользователя кредитного счета {@link CreditAccount#user}. <br>
+    /**
+     * Процедура определения пользователя кредитного счета {@link CreditAccount#user}. <br>
      * См. также {@link User}
-     * @param user пользователь кредитного счета */
+     *
+     * @param user пользователь кредитного счета
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    /** Процедура определения банка кредитного счета {@link CreditAccount#bank}. <br>
+    /**
+     * Процедура определения банка кредитного счета {@link CreditAccount#bank}. <br>
      * См. также {@link Bank}
-     * @param bank банк кредитного счета, где был взят кредит */
+     *
+     * @param bank банк кредитного счета, где был взят кредит
+     */
     public void setBank(Bank bank) {
         this.bank = bank;
     }
 
-    /** Процедура определения даты начала кредита {@link CreditAccount#startCreditDate}
-     * @param startCreditDate дата начала кредита */
+    /**
+     * Процедура определения даты начала кредита {@link CreditAccount#startCreditDate}
+     *
+     * @param startCreditDate дата начала кредита
+     */
     public void setStartCreditDate(LocalDate startCreditDate) {
         this.startCreditDate = startCreditDate;
     }
 
-    /** Процедура определения даты окончания кредита {@link CreditAccount#finishCreditDate}
-     * @param finishCreditDate дата окончания кредита */
+    /**
+     * Процедура определения даты окончания кредита {@link CreditAccount#finishCreditDate}
+     *
+     * @param finishCreditDate дата окончания кредита
+     */
     public void setFinishCreditDate(LocalDate finishCreditDate) {
         this.finishCreditDate = finishCreditDate;
     }
 
-    /** Процедура определения количества месяцев кредита {@link CreditAccount#creditMonthQty}
-     * @param creditMonthQty количество месяцев кредита */
+    /**
+     * Процедура определения количества месяцев кредита {@link CreditAccount#creditMonthQty}
+     *
+     * @param creditMonthQty количество месяцев кредита
+     */
     public void setCreditMonthQty(Integer creditMonthQty) {
         this.creditMonthQty = creditMonthQty;
     }
 
-    /** Процедура определения суммы кредита {@link CreditAccount#creditSum}
-     * @param creditSum сумма кредита */
+    /**
+     * Процедура определения суммы кредита {@link CreditAccount#creditSum}
+     *
+     * @param creditSum сумма кредита
+     */
     public void setCreditSum(Integer creditSum) {
         this.creditSum = creditSum;
     }
 
-    /** Процедура определения ежемесячного платежа кредита {@link CreditAccount#creditMonthPayment}
-     * @param creditMonthPayment сумма ежемесячного платежа кредита */
+    /**
+     * Процедура определения ежемесячного платежа кредита {@link CreditAccount#creditMonthPayment}
+     *
+     * @param creditMonthPayment сумма ежемесячного платежа кредита
+     */
     public void setCreditMonthPayment(Integer creditMonthPayment) {
         this.creditMonthPayment = creditMonthPayment;
     }
 
-    /** Процедура определения процентной ставки кредита {@link CreditAccount#paymentAccount}
-     * @param percent процентной ставки кредита */
+    /**
+     * Процедура определения процентной ставки кредита {@link CreditAccount#paymentAccount}
+     *
+     * @param percent процентной ставки кредита
+     */
     public void setPercent(Float percent) {
         this.percent = percent;
     }
 
-    /** Процедура определения сотрудника, который выдал кредит {@link CreditAccount#bank}. <br>
+    /**
+     * Процедура определения сотрудника, который выдал кредит {@link CreditAccount#bank}. <br>
      * См. также {@link Employee}
-     * @param employee сотрудник, который выдал кредит */
+     *
+     * @param employee сотрудник, который выдал кредит
+     */
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
-    /** Процедура определения платежного счета {@link CreditAccount#paymentAccount}. <br>
+    /**
+     * Процедура определения платежного счета {@link CreditAccount#paymentAccount}. <br>
      * См. также {@link PaymentAccount}
-     * @param paymentAccount платежный счет, с которого осуществляется погашение кредита. */
+     *
+     * @param paymentAccount платежный счет, с которого осуществляется погашение кредита.
+     */
     public void setPaymentAccount(PaymentAccount paymentAccount) {
         this.paymentAccount = paymentAccount;
     }

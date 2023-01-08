@@ -4,8 +4,7 @@ import tech.reliab.course.lyashenkosd.bank.entity.Bank;
 import tech.reliab.course.lyashenkosd.bank.entity.BankAtm;
 import tech.reliab.course.lyashenkosd.bank.entity.BankOffice;
 
-/** Интерфейс операций, связанных с классом {@link BankAtm}
- * @version 0.1*/
+/** Интерфейс операций, связанных с классом {@link BankAtm}*/
 public interface AtmService {
 
 
@@ -15,13 +14,13 @@ public interface AtmService {
 
     BankAtm getAtm(Integer id);
 
-    /** Процедура добавления денег в банкомат. <br>
-     * @param bankAtm банкомат, к которому следует добавить деньги
-     * @param moneyQty количество денег, которое следует добавить*/
-    void addMoney(BankAtm bankAtm, Integer moneyQty);
-    /** Удаление данных о банкомате. <br>
-     * @param atm банкомат, экземпляр класса BankAtm, который требуется удалить
-     * @return null
+    /**
+     * Процедура добавления денег в банкомат. <br>
+     *
+     * @param bankAtm  банкомат, к которому следует добавить деньги
+     * @param moneyQty количество денег, которое следует добавить
      */
-    public BankAtm delete(BankAtm atm);
+    void addMoney(BankAtm bankAtm, Integer moneyQty);
+
+
 }

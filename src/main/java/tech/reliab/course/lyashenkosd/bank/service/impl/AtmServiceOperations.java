@@ -5,16 +5,17 @@ import tech.reliab.course.lyashenkosd.bank.entity.BankAtm;
 import tech.reliab.course.lyashenkosd.bank.entity.BankOffice;
 import tech.reliab.course.lyashenkosd.bank.service.AtmService;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 
 /** Класс-реализация операция с банкоматом, реализует интерфейс сервиса банкомата {@link AtmService}. <br>
- * Реализуется бизнес-логика. Singleton */
+ * Реализуется бизнес-логика. Singleton
+ */
 public class AtmServiceOperations implements AtmService {
-    private final List<BankAtm> atms = new ArrayList<BankAtm>();
+    private final Map<Integer, BankAtm> atms = new HashMap<>();
 
-    private AtmServiceOperations(){}
+    private AtmServiceOperations() {
+    }
 
     public static final AtmService ATM_SERVICE = new AtmServiceOperations();
 
@@ -24,8 +25,8 @@ public class AtmServiceOperations implements AtmService {
                           Integer moneyQtyInAtm, Integer serviceCost, BankAtm.Status status) {
         bank.setAtmQty(bank.getAtmQty() + 1);
         bankOffice.setAtmQty(bankOffice.getAtmQty() + 1);
-        atms.add(new BankAtm(bank, bankOffice, id, name, employeeId, cashOutStatus, cashInStatus,
-                                moneyQtyInAtm, serviceCost, status));
+        atms.put(id, new BankAtm(bank, bankOffice, id, name, employeeId, cashOutStatus, cashInStatus,
+                moneyQtyInAtm, serviceCost, status));
     }
 
     @Override
@@ -33,22 +34,16 @@ public class AtmServiceOperations implements AtmService {
         return atms.get(id);
     }
 
-    public void addMoney(BankAtm bankAtm, Integer moneyQty){
+    public void addMoney(BankAtm bankAtm, Integer moneyQty) {
 
-        if (moneyQty > bankAtm.getBank().getMoneyQty()){
+        if (moneyQty > bankAtm.getBank().getMoneyQty()) {
             System.out.println("Невозможно поместить в банкомат сумму превышающую кол-во всех денег в банке");
             return;
         }
-        if (moneyQty < 0){
+        if (moneyQty < 0) {
             System.out.println("Невозможно поместить в банкомат отрицательную сумму");
             return;
         }
         bankAtm.setMoneyQtyInAtm(bankAtm.getMoneyQtyInAtm() + moneyQty);
     }
-    @Override
-    public BankAtm delete(BankAtm atm){
-        atm = null;
-        return atm;
-    }
-
 }
