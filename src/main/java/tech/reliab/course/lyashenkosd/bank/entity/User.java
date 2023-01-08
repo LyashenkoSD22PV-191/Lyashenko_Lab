@@ -166,6 +166,7 @@ public class User {
         return this.birthDate;
     }
 
+
     /**
      * Функция получения значения поля {@link User#workPlace}
      *
@@ -282,6 +283,7 @@ public class User {
     public void setCreditRate(Integer creditRate) {
         this.creditRate = creditRate;
     }
-
 }
+
+
 

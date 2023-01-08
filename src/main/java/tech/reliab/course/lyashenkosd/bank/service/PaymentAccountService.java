@@ -4,6 +4,8 @@ import tech.reliab.course.lyashenkosd.bank.entity.Bank;
 import tech.reliab.course.lyashenkosd.bank.entity.PaymentAccount;
 import tech.reliab.course.lyashenkosd.bank.entity.User;
 
+import java.io.IOException;
+
 /** Интерфейс операций, связанных с классом {@link PaymentAccount}
 */
 public interface PaymentAccountService {
@@ -37,4 +39,10 @@ public interface PaymentAccountService {
      */
     void subMoney(PaymentAccount paymentAccount, Integer moneyQty);
 
+    /**
+     * Процедура для переноса платежного счета
+     * @param userId у какого пользователя переносим
+     * @param bankId куда будем переносить счет
+     */
+    void transitAcc(Integer userId, Integer bankId) throws IOException;
 }

@@ -6,10 +6,10 @@ import tech.reliab.course.lyashenkosd.bank.utils.UserException;
 
 import static tech.reliab.course.lyashenkosd.bank.utils.Constants.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /** Класс-реализация операций клиента, реализует интерфейс клиента {@link User} <br>
  * Реализуется бизнес-логика. Singleton
@@ -21,6 +21,8 @@ public class UserServiceOperations implements UserService {
     BankOfficeService bankOfficeService = BankOfficeServiceOperations.BANK_OFFICE_SERVICE;
     EmployeeService employeeService = EmployeeServiceOperations.EMPLOYEE_SERVICE;
     AtmService atmService = AtmServiceOperations.ATM_SERVICE;
+    PaymentAccountService paymentAccountService = PaymentServiceOperations.PAYMENT_ACCOUNT_SERVICE;
+    CreditAccountService creditAccountService = CreditAccountServiceOperations.CREDIT_ACCOUNT_SERVICE;
 
     private final Map<Integer, User> users = new HashMap<>();
 
@@ -145,16 +147,6 @@ public class UserServiceOperations implements UserService {
 
     @Override
     public Boolean getCredit(Integer id, Integer money) throws UserException {
-        PaymentAccountService paymentAccountService = PaymentServiceOperations.PAYMENT_ACCOUNT_SERVICE;
-        CreditAccountService creditAccountService = CreditAccountServiceOperations.CREDIT_ACCOUNT_SERVICE;
-
-        if (id <= 0 || id > QUANTITY_USERS) {
-            throw new UserException("Такого пользователя не существует");
-        }
-
-        if (money <= 0) {
-            throw new UserException("Кредит не может быть выдан на отрицательную сумму");
-        }
 
         int[] idArray = searchPlaceForGiveCredit(money);
         User user = users.get(id);
@@ -213,13 +205,13 @@ public class UserServiceOperations implements UserService {
 
 
         for (int i = 1; i <= QUANTITY_PAYS_AND_CREDITS; i++) {
-            if (id == paymentAccountService.getPaymentAccount(i).getUser().getId()) {
+            if (Objects.equals(id, paymentAccountService.getPaymentAccount(i).getUser().getId())) {
                 System.out.println(paymentAccountService.getPaymentAccount(i));
             }
         }
 
         for (int i = 1; i <= QUANTITY_PAYS_AND_CREDITS; i++) {
-            if (id == creditAccountService.getCreditAccount(i).getUser().getId()) {
+            if (Objects.equals(id, creditAccountService.getCreditAccount(i).getUser().getId())) {
                 System.out.println(creditAccountService.getCreditAccount(i));
             }
         }
@@ -239,4 +231,65 @@ public class UserServiceOperations implements UserService {
         user.setWorkPlace(workPlace);
     }
 
+    @Override
+    public void getUsersPaysInfo(Integer id) throws IOException {
+        System.out.println("\n");
+
+        /* очищаем файл от данных прошлого запуска */
+        try (FileWriter writer = new FileWriter("Payments.txt", false)) {
+            writer.write('\n');
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        try (FileWriter writer = new FileWriter("Payments.txt", true)) {
+            /* запись в файл платежных счетов */
+            writer.write("Платежный счет: \n");
+
+            List<Integer> pyAccId = new ArrayList<>();
+
+            boolean isUserHasPaymentAcc = false;
+            for (int i = 1; i <= QUANTITY_PAYS_AND_CREDITS; i++) {
+                PaymentAccount pay = paymentAccountService.getPaymentAccount(i);
+                if (pay != null) {
+                    if (Objects.equals(pay.getUser().getId(), id)) {
+                        isUserHasPaymentAcc = true;
+                        writer.write(pay.toString());
+                        writer.flush();
+                        pyAccId.add(pay.getId());
+                    }
+                }
+            }
+            if (!isUserHasPaymentAcc) {
+                writer.write("У пользователя отсутствуют платежные счета\n");
+                writer.flush();
+            }
+
+            /* запись в файл кредитов */
+            boolean isUserHasCredits = false;
+            writer.write("\nКредитный счет: \n");
+            for (int i = 1; i <= QUANTITY_PAYS_AND_CREDITS; i++) {
+                CreditAccount credit = creditAccountService.getCreditAccount(i);
+                if (credit != null) {
+                    if (Objects.equals(credit.getUser().getId(), id)) {
+                        isUserHasCredits = true;
+                        writer.write(credit.toString());
+                        writer.flush();
+                    }
+                }
+            }
+            if (!isUserHasCredits) {
+                writer.write("У пользователя отсутствуют кредитные счета");
+                writer.flush();
+            }
+
+            writer.write("\nEOF\n");
+            writer.write("PyAcc: " + pyAccId.get(0) + "\n");
+            writer.write("PyAcc: " + pyAccId.get(1) + "\n");
+        } catch (IOException ex) {
+            throw new IOException(ex.getMessage());
+        }
+
+    }
 }

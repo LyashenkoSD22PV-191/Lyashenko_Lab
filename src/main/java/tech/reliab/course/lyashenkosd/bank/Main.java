@@ -5,6 +5,7 @@ import tech.reliab.course.lyashenkosd.bank.service.*;
 import tech.reliab.course.lyashenkosd.bank.service.impl.*;
 import tech.reliab.course.lyashenkosd.bank.utils.UserException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ import static tech.reliab.course.lyashenkosd.bank.utils.Constants.*;
 
 
 public class Main {
-    public static void main(String[] args) throws UserException {
+    public static void main(String[] args) throws IOException {
 
         BankService bankService = BankServiceOperations.BANK_SERVICE;
         for (int i = 1; i <= QUANTITY_BANKS; i++) {
@@ -106,26 +107,33 @@ public class Main {
                             counter,
                             LocalDate.of(2000, 1, 1),
                             LocalDate.of(2000, 1, 1),
-                            12, 228000, 2280
-                    );
+                            12, 228000, 2280);
                 }
             }
         }
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Вы хотите получить кредит! Вы по адресу!");
         System.out.print("Введите свой id: ");
         Integer userId = in.nextInt();
 
-        System.out.println("На какую сумму хотите взять кредит?");
-        Integer money = in.nextInt();
+        System.out.println("1 - Вывести все счета в txt файл");
+        System.out.println("2 - Перенести счет из моего банка в другой");
+        System.out.print("Выберите действие: ");
 
-
-        userService.getCredit(userId, money);
-        System.out.print("Кредит успешно выдан. Удачи выплатить!");
-
+        int answer = in.nextInt();
+        switch (answer) {
+            case 1 -> userService.getUsersPaysInfo(userId);
+            case 2 -> {
+                System.out.println("Вы выбрали перенос счета в другой банк!");
+                System.out.print("Введите id банка, куда будем переносить: ");
+                int bankId = in.nextInt();
+                paymentAccountService.transitAcc(userId, bankId);
+            }
+            default -> System.out.println("Надо было что-то выбрать");
+        }
     }
 }
+
 
 
 
